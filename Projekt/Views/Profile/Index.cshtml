@@ -1,0 +1,99 @@
+﻿@model ProfileVM
+
+@{
+    ViewBag.Title = "Profil";
+    var avatar = string.IsNullOrWhiteSpace(Model.AvatarUrl)
+        ? "https://api.dicebear.com/8.x/identicon/svg?seed=" + Uri.EscapeDataString(Model.Username ?? "user")
+        : Model.AvatarUrl;
+}
+
+<h2 class="mb-3">Profil</h2>
+
+<div class="row g-3">
+    <div class="col-md-4">
+        <div class="card p-3">
+            <div class="d-flex align-items-center gap-3">
+                <img src="@avatar"
+                     alt="Avatar"
+                     style="width:110px;height:110px;border-radius:16px;object-fit:cover;"
+                     class="border" />
+                <div>
+                    <div class="text-muted small">Korisnik</div>
+                    <div class="h4 mb-1">@Model.Username</div>
+                    <div class="text-muted small">ID: @Model.Id</div>
+                </div>
+            </div>
+
+            <div class="mt-3 d-grid gap-2">
+                @Html.ActionLink("Uredi profil", "Edit", "Profile", null, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Moji rezultati", "My", "Results", null, new { @class = "btn btn-outline-secondary" })
+            </div>
+
+            <hr class="my-3" />
+
+            <div class="small text-muted">
+                Avatar URL:
+                @if (string.IsNullOrWhiteSpace(Model.AvatarUrl))
+                {
+                    <span class="badge bg-secondary ms-1">nije postavljeno</span>
+                }
+                else
+                {
+                    <span class="badge bg-success ms-1">postavljeno</span>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <div class="card p-3 h-100">
+                    <h5>Ukupno pokušaja</h5>
+                    <h2>@Model.AttemptsCount</h2>
+                    <p class="text-muted mb-0">Broj odigranih kvizova</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card p-3 h-100">
+                    <h5>Najbolji rezultat</h5>
+                    <h2>@Model.BestScore</h2>
+                    <p class="text-muted mb-0">Top score</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card p-3 h-100">
+                    <h5>Zadnji kviz</h5>
+                    <h2 style="font-size: 1.4rem;">@Model.LastQuizName</h2>
+                    <p class="text-muted mb-0">Posljednje odigrani</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card p-3 h-100">
+                    <h5>Korisnik</h5>
+                    <h2>@Model.Username</h2>
+                    <p class="text-muted mb-0">Profil</p>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="card p-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="h5 mb-1">Brzi linkovi</div>
+                            <div class="text-muted small">Kreni dalje bez traženja po meniju.</div>
+                        </div>
+                    </div>
+
+                    <div class="mt-3 d-flex flex-wrap gap-2">
+                        @Html.ActionLink("Igraj kviz", "Index", "Play", null, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Rang lista", "Index", "Leaderboard", null, new { @class = "btn btn-outline-dark" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

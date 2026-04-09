@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Pošalji izazov";
+}
+
+<h2>Pošalji izazov</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("quizId", (int)ViewBag.QuizId)
+
+    <div class="form-group">
+        <label>Odaberi korisnika</label>
+        @Html.DropDownList("toUserId", (SelectList)ViewBag.Users, "Odaberi korisnika", new { @class = "form-control" })
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">Pošalji izazov</button>
+}

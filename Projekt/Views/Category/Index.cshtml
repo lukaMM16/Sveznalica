@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@model List<Category>
+
+<h2>Kategorije</h2>
+
+<p>
+    @Html.ActionLink("Nova kategorija", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Naziv</th>
+        <th></th>
+    </tr>
+
+    @foreach (var c in Model)
+    {
+        <tr>
+            <td>@c.Id</td>
+            <td>@c.Name</td>
+            <td class="text-end">
+                @Html.ActionLink("Uredi", "Edit", new { id = c.Id }, new { @class = "btn btn-sm btn-warning" })
+                @Html.ActionLink("Obriši", "Delete", new { id = c.Id }, new { @class = "btn btn-sm btn-danger" })
+            </td>
+        </tr>
+    }
+</table>
+

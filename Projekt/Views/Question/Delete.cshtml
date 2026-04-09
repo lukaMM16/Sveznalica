@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+@model Question
+
+<h2>Brisanje pitanja</h2>
+
+<p>Obrisati pitanje:</p>
+<p><b>@Model.Text</b></p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+
+    <button class="btn btn-danger" type="submit">Obriši</button>
+    @Html.ActionLink("Odustani", "Index", null, new { @class = "btn btn-secondary" })
+}

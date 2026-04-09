@@ -1,0 +1,55 @@
+﻿@model List<Challenge>
+
+@{
+    ViewBag.Title = "Moji izazovi";
+}
+
+<h2>Moji izazovi</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        Nemaš nijedan izazov.
+    </div>
+}
+else
+{
+    <table class="table table-striped">
+        <tr>
+            <th>Kviz</th>
+            <th>Od korisnika</th>
+            <th>Status</th>
+            <th>Datum</th>
+            <th></th>
+        </tr>
+
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.QuizTitle</td>
+                <td>@c.FromUsername</td>
+                <td>@c.Status</td>
+                <td>@c.CreatedAt</td>
+                <td>
+                    @if (c.Status == "Pending")
+                    {
+                        @Html.ActionLink(
+                            "Pokreni",
+                            "AcceptChallenge",
+                            "Play",
+                            new { id = c.Id },
+                            new { @class = "btn btn-sm btn-success" }
+                        )
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}

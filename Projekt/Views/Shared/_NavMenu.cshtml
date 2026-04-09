@@ -1,0 +1,100 @@
+﻿@model NavMenuVM
+
+@{
+    string Active(string controller) => (Model.Current == controller) ? "active" : "";
+
+    var role = (string)Session["Role"];
+    var username = (string)Session["Username"];
+    bool isAdmin = (role == "Admin");
+    bool isLoggedIn = !string.IsNullOrEmpty(username);
+}
+
+@if (isAdmin)
+{
+    <li class="nav-item">
+        <a class="nav-link @Active("Category")" href="@Url.Action("Index","Category")">
+            <i class="fa-solid fa-tags me-1"></i>
+            Kategorije
+            <span class="badge bg-secondary ms-1">@Model.CategoriesCount</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link @Active("Quiz")" href="@Url.Action("Index","Quiz")">
+            <i class="fa-solid fa-list-check me-1"></i>
+            Kvizovi
+            <span class="badge bg-secondary ms-1">@Model.QuizzesCount</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link @Active("Question")" href="@Url.Action("Index","Question")">
+            <i class="fa-solid fa-circle-question me-1"></i>
+            Pitanja
+            <span class="badge bg-secondary ms-1">@Model.QuestionsCount</span>
+        </a>
+    </li>
+}
+
+<li class="nav-item">
+    <a class="nav-link @Active("Play")" href="@Url.Action("Index","Play")">
+        <i class="fa-solid fa-play me-1"></i>
+        Igraj
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link @Active("Leaderboard")" href="@Url.Action("Index","Leaderboard")">
+        <i class="fa-solid fa-trophy me-1"></i>
+        Rang lista
+    </a>
+</li>
+
+@if (isLoggedIn)
+{
+    <li class="nav-item">
+        <a class="nav-link @Active("Results")" href="@Url.Action("My","Results")">
+            <i class="fa-solid fa-chart-line me-1"></i>
+            Moji rezultati
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link @Active("Profile")" href="@Url.Action("Index","Profile")">
+            <i class="fa-solid fa-id-badge me-1"></i>
+            Profil
+        </a>
+    </li>
+}
+
+
+<li class="nav-item ms-auto">
+    @if (isLoggedIn)
+    {
+        <span class="nav-link">
+            <i class="fa-solid fa-user me-1"></i>
+            @username
+            @if (isAdmin)
+            {
+                <span class="badge bg-warning text-dark ms-2">Admin</span>
+            }
+        </span>
+    }
+    else
+    {
+        <a class="nav-link @Active("Auth")" href="@Url.Action("Login","Auth")">
+            <i class="fa-solid fa-right-to-bracket me-1"></i>
+            Login
+        </a>
+    }
+</li>
+
+@if (isLoggedIn)
+{
+    <li class="nav-item">
+        <a class="nav-link" href="@Url.Action("Logout","Auth")">
+            <i class="fa-solid fa-right-from-bracket me-1"></i>
+            Logout
+        </a>
+    </li>
+}

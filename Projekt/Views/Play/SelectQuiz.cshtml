@@ -1,0 +1,68 @@
+﻿@model List<Quiz>
+
+@{
+    ViewBag.Title = "Igraj kviz";
+}
+
+<h2>Odaberi kviz</h2>
+
+@using (Html.BeginForm("Index", "Play", FormMethod.Get))
+{
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <label>Kategorija</label>
+            @Html.DropDownList("categoryId", (SelectList)ViewBag.Categories, "Sve kategorije", new { @class = "form-control" })
+        </div>
+
+        <div class="col-md-4">
+            <label>Težina</label>
+            <select name="difficulty" class="form-control">
+                <option value="">Sve težine</option>
+                <option value="1" @(ViewBag.SelectedDifficulty != null && (int)ViewBag.SelectedDifficulty == 1 ? "selected" : "")>Lako</option>
+                <option value="2" @(ViewBag.SelectedDifficulty != null && (int)ViewBag.SelectedDifficulty == 2 ? "selected" : "")>Srednje</option>
+                <option value="3" @(ViewBag.SelectedDifficulty != null && (int)ViewBag.SelectedDifficulty == 3 ? "selected" : "")>Teško</option>
+            </select>
+        </div>
+
+        <div class="col-md-4" style="margin-top:24px;">
+            <button type="submit" class="btn btn-primary">Filtriraj</button>
+        </div>
+    </div>
+}
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">Nema dostupnih kvizova za odabrani filter.</div>
+}
+else
+{
+    <table class="table table-striped">
+        <tr>
+            <th>Naziv</th>
+            <th>Kategorija</th>
+            <th>Težina</th>
+            <th>Limit</th>
+            <th></th>
+        </tr>
+
+        @foreach (var q in Model)
+        {
+            <tr>
+                <td>@q.Title</td>
+                <td>@q.CategoryName</td>
+                <td>
+                    @(q.Difficulty == 1 ? "Lako" :
+                      q.Difficulty == 2 ? "Srednje" : "Teško")
+                </td>
+                <td>@q.TimeLimitSec s</td>
+                <td>
+                    @using (Html.BeginForm("Start", "Play", FormMethod.Get))
+                    {
+                        @Html.Hidden("quizId", q.Id)
+                        <button type="submit" class="btn btn-success btn-sm">Igraj</button>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}

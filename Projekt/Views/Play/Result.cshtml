@@ -1,0 +1,27 @@
+﻿@model QuizAttempt
+
+@{
+    ViewBag.Title = "Result";
+}
+
+<h2>Rezultat</h2>
+
+<p><b>Kviz:</b> @Model.QuizTitle</p>
+<p><b>Bodovi:</b> @Model.Score</p>
+<p><b>Start:</b> @Model.StartedAt</p>
+<p><b>Kraj:</b> @Model.FinishedAt</p>
+
+<hr />
+
+
+@using (Html.BeginForm("Start", "Play", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("quizId", Model.QuizId)
+    <button type="submit" class="btn btn-primary">Igraj opet</button>
+}
+
+<div class="mt-4 d-flex gap-2">
+    @Html.ActionLink("Igraj opet", "Index", "Play", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Moji rezultati", "My", "Results", null, new { @class = "btn btn-outline-secondary" })
+</div>

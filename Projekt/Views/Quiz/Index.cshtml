@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@model List<Quiz>
+
+<h2>Kvizovi</h2>
+
+<p>@Html.ActionLink("Novi kviz", "Create", null, new { @class = "btn btn-primary" })</p>
+
+<form method="get" class="mb-3">
+    <div style="display:flex; gap:10px; align-items:center;">
+
+        <select name="categoryId" class="form-control">
+            <option value="">Sve kategorije</option>
+            @foreach (var cat in (SelectList)ViewBag.CategoryId)
+            {
+                <option value="@cat.Value">@cat.Text</option>
+            }
+        </select>
+
+        <select name="difficulty" class="form-control">
+            <option value="">Sve težine</option>
+            <option value="1">Lako</option>
+            <option value="2">Srednje</option>
+            <option value="3">Teško</option>
+        </select>
+
+        <button type="submit" class="btn btn-primary">Filtriraj</button>
+    </div>
+</form>
+
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Naziv</th>
+        <th>Kategorija</th>
+        <th>Težina</th>
+        <th>Limit (s)</th>
+        <th></th>
+    </tr>
+    @foreach (var q in Model)
+    {
+        <tr>
+            <td>@q.Id</td>
+            <td>@q.Title</td>
+            <td>@q.CategoryName</td>
+            <td>
+                @(q.Difficulty == 1 ? "Lako" :
+      q.Difficulty == 2 ? "Srednje" : "Teško")
+            </td>
+            <td>@q.TimeLimitSec</td>
+            <td>
+                @Html.ActionLink("Uredi", "Edit", new { id = q.Id }, new { @class = "btn btn-sm btn-warning" })
+                @Html.ActionLink("Obriši", "Delete", new { id = q.Id }, new { @class = "btn btn-sm btn-danger" })
+                @Html.ActionLink("Challenge", "Challenge", "Play",
+    new { quizId = q.Id },
+    new { @class = "btn btn-sm btn-info" })
+            </td>
+        </tr>
+    }
+</table>

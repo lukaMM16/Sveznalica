@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@model QuestionEditVM
+
+<h2>Uredi pitanje</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="form-group">
+        @Html.Label("Kviz")
+        @Html.DropDownList("QuizId", (SelectList)ViewBag.QuizId, "-- odaberi --", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.QuizId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Text, "Pitanje")
+        @Html.TextBoxFor(m => m.Text, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Text, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Points, "Bodovi")
+        @Html.TextBoxFor(m => m.Points, new { @class = "form-control", type = "number", min = "1", max = "50" })
+        @Html.ValidationMessageFor(m => m.Points, "", new { @class = "text-danger" })
+    </div>
+
+    <hr />
+    <h4>Odgovori (4)</h4>
+
+    for (int i = 0; i < Model.Options.Count; i++)
+    {
+        <div class="form-group">
+            <label>Odgovor @(i + 1)</label>
+            <input class="form-control" name="Options[@i].Text" value="@(Model.Options[i].Text)" />
+        </div>
+    }
+
+    <div class="form-group">
+        <label>Točan odgovor</label>
+        @{
+            int correctIndex = ViewBag.CorrectIndex != null ? (int)ViewBag.CorrectIndex : 0;
+        }
+        <select class="form-control" name="correctIndex">
+            <option value="0" @(correctIndex == 0 ? "selected" : "")>Odgovor 1</option>
+            <option value="1" @(correctIndex == 1 ? "selected" : "")>Odgovor 2</option>
+            <option value="2" @(correctIndex == 2 ? "selected" : "")>Odgovor 3</option>
+            <option value="3" @(correctIndex == 3 ? "selected" : "")>Odgovor 4</option>
+        </select>
+    </div>
+
+    <button class="btn btn-success" type="submit">Spremi</button>
+    @Html.ActionLink("Natrag", "Index", null, new { @class = "btn btn-secondary" })
+}

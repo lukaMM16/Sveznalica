@@ -1,0 +1,27 @@
+﻿@model ProfileVM
+@{
+    ViewBag.Title = "Uredi profil";
+}
+
+<h2>Uredi profil</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <label>Korisnik</label>
+        <input class="form-control" value="@Model.Username" disabled />
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.AvatarUrl)
+        @Html.TextBoxFor(m => m.AvatarUrl, new { @class = "form-control", placeholder = "https://..." })
+        @Html.ValidationMessageFor(m => m.AvatarUrl, "", new { @class = "text-danger" })
+        <small class="text-muted">Zalijepi URL slike (png/jpg/webp).</small>
+    </div>
+
+    <button class="btn btn-success" type="submit">Spremi</button>
+    <a class="btn btn-secondary" href="@Url.Action("Index","Profile")">Natrag</a>
+}

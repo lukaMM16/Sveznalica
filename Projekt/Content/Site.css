@@ -1,0 +1,59 @@
+﻿/* Set padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.navbar .nav-link {
+    color: rgba(255, 255, 255, 0.82) !important;
+    padding: 10px 14px;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    margin: 0 2px;
+}
+
+    .navbar .nav-link:hover {
+        color: #ffffff !important;
+        background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .navbar .nav-link.active {
+        color: #ffffff !important;
+        background-color: rgba(255, 255, 255, 0.14);
+        font-weight: 600;
+    }
+
+    .navbar .nav-link.nav-auth {
+        color: #9fd3ff !important;
+    }
+
+        .navbar .nav-link.nav-auth:hover {
+            color: #ffffff !important;
+            background-color: rgba(159, 211, 255, 0.16);
+        }
+
+        .navbar .nav-link.nav-auth.active {
+            color: #ffffff !important;
+            background-color: rgba(159, 211, 255, 0.22);
+            font-weight: 600;
+        }
+
+.navbar-brand {
+    font-weight: 700;
+    margin-right: 18px;
+}

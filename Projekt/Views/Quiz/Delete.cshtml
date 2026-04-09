@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+@model Quiz
+
+<h2>Brisanje kviza</h2>
+
+<p>
+    Jeste li sigurni da želite obrisati kviz:
+    <strong>@Model.Title</strong>
+    (<em>@Model.CategoryName</em>)?
+</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+
+    <button type="submit" class="btn btn-danger">
+        Obriši
+    </button>
+
+    @Html.ActionLink(
+        "Odustani",
+        "Index",
+        null,
+        new { @class = "btn btn-secondary" }
+    )
+}

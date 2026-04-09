@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Question";
+}
+
+<h2>Question</h2>
+
+@model PlayQuestionVM
+
+<h2>Kviz</h2>
+
+<p>
+    Pitanje @(Model.QuestionIndex + 1) / @Model.TotalQuestions
+</p>
+
+<h4>@Model.QuestionText</h4>
+
+@using (Html.BeginForm("Submit", "Play", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => m.AttemptId)
+    @Html.HiddenFor(m => m.QuizId)
+    @Html.HiddenFor(m => m.QuestionId)
+    @Html.HiddenFor(m => m.Points)
+    @Html.HiddenFor(m => m.QuestionIndex)
+    @Html.HiddenFor(m => m.TotalQuestions)
+
+    foreach (var o in Model.Options)
+    {
+        <div class="radio">
+            <label>
+                <input type="radio" name="SelectedOptionId" value="@o.Id" />
+                @o.Text
+            </label>
+        </div>
+    }
+
+    <button class="btn btn-success" type="submit">Potvrdi</button>
+}

@@ -1,0 +1,30 @@
+﻿@model System.Collections.Generic.List<QuizAttempt>
+@{
+    ViewBag.Title = "Moji rezultati";
+}
+
+<h2>Moji rezultati</h2>
+
+@if (Model.Count == 0)
+{
+    <p>Nema još rezultata. Odigraj kviz pa se vrati ovdje </p>
+}
+else
+{
+    <table class="table table-striped">
+        <tr>
+            <th>Kviz</th>
+            <th>Bodovi</th>
+            <th>Završeno</th>
+        </tr>
+
+        @foreach (var a in Model)
+        {
+            <tr>
+                <td>@a.QuizTitle</td>
+                <td>@a.Score</td>
+                <td>@a.FinishedAt</td>
+            </tr>
+        }
+    </table>
+}

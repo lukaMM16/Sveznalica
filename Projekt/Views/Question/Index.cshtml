@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@model List<Question>
+
+<h2>Pitanja</h2>
+
+<p>
+    @Html.ActionLink("Novo pitanje", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Kviz</th>
+        <th>Pitanje</th>
+        <th>Bodovi</th>
+        <th></th>
+    </tr>
+
+    @foreach (var q in Model)
+    {
+        <tr>
+            <td>@q.Id</td>
+            <td>@q.QuizTitle</td>
+            <td>@q.Text</td>
+            <td>@q.Points</td>
+            <td>
+                @Html.ActionLink("Uredi", "Edit", new { id = q.Id }, new { @class = "btn btn-sm btn-warning" })
+                @Html.ActionLink("Obriši", "Delete", new { id = q.Id }, new { @class = "btn btn-sm btn-danger" })
+            </td>
+        </tr>
+    }
+</table>

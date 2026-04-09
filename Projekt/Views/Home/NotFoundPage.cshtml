@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Stranica nije pronađena";
+}
+
+<div class="text-center" style="padding:60px 20px;">
+    <h1>404</h1>
+    <h2>Stranica nije pronađena</h2>
+    <p>Stranica koju tražiš ne postoji ili je premještena.</p>
+
+    <br />
+
+    @Html.ActionLink("Povratak na početnu", "Index", "Home", null, new { @class = "btn btn-primary" })
+</div>

@@ -1,0 +1,85 @@
+﻿@model NavMenuVM
+
+@{
+    string current = (Model?.Current ?? "").ToLower();
+    bool isLoggedIn = Session["UserId"] != null;
+    string role = Session["Role"]?.ToString() ?? "";
+    bool isAdmin = role == "Admin";
+
+    Func<string, object> navAttrs = controller => new
+    {
+        @class = current == controller.ToLower() ? "nav-link active" : "nav-link"
+    };
+
+    Func<string, object> authAttrs = controller => new
+    {
+        @class = current == controller.ToLower() ? "nav-link nav-auth active" : "nav-link nav-auth"
+    };
+}
+
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <li class="nav-item">
+        @Html.ActionLink("Početna", "Index", "Home", null, navAttrs("Home"))
+    </li>
+
+    @if (isAdmin)
+    {
+        <li class="nav-item">
+            @Html.ActionLink("Kvizovi", "Index", "Quiz", null, navAttrs("Quiz"))
+        </li>
+
+        <li class="nav-item">
+            @Html.ActionLink("Pitanja", "Index", "Question", null, navAttrs("Question"))
+        </li>
+
+        <li class="nav-item">
+            @Html.ActionLink("Kategorije", "Index", "Category", null, navAttrs("Category"))
+        </li>
+    }
+
+    @if (isLoggedIn)
+    {
+        <li class="nav-item">
+            @Html.ActionLink("Igraj kviz", "Index", "Play", null, navAttrs("Play"))
+        </li>
+
+        <li class="nav-item">
+            @Html.ActionLink("Timovi", "Index", "Team", null, navAttrs("Team"))
+        </li>
+
+        <li class="nav-item">
+            @Html.ActionLink("Leaderboard", "Index", "Leaderboard", null, navAttrs("Leaderboard"))
+        </li>
+
+        <li class="nav-item">
+            @Html.ActionLink("Moji rezultati", "My", "Results", null, navAttrs("Results"))
+        </li>
+
+        <li class="nav-item">
+            @Html.ActionLink("Moji izazovi", "MyChallenges", "Play", null, navAttrs("Play"))
+        </li>
+
+        <li class="nav-item">
+            @Html.ActionLink("Profil", "Index", "Profile", null, navAttrs("Profile"))
+        </li>
+    }
+</ul>
+
+<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+    @if (!isLoggedIn)
+    {
+        <li class="nav-item">
+            @Html.ActionLink("Login", "Login", "Auth", null, authAttrs("Auth"))
+        </li>
+
+        <li class="nav-item">
+            @Html.ActionLink("Registracija", "Register", "Auth", null, authAttrs("Auth"))
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            @Html.ActionLink("Logout", "Logout", "Auth", null, authAttrs("Auth"))
+        </li>
+    }
+</ul>

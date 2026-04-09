@@ -1,0 +1,37 @@
+﻿@model Team
+@{
+    ViewBag.Title = "Detalji tima";
+    var members = ViewBag.Members as List<TeamMember>;
+}
+
+<h2>Detalji tima</h2>
+
+<div class="card p-3 mb-3">
+    <h4>@Model.Name</h4>
+    <p><strong>Vlasnik:</strong> @Model.OwnerUsername</p>
+    <p><strong>Kreirano:</strong> @Model.CreatedAt</p>
+</div>
+
+<h4>Članovi</h4>
+
+@if (members == null || !members.Any())
+{
+    <div class="alert alert-info">Tim nema članova.</div>
+}
+else
+{
+    <ul class="list-group">
+        @foreach (var m in members)
+        {
+            <li class="list-group-item">
+                @m.Username
+            </li>
+        }
+    </ul>
+}
+
+<br />
+
+<p>
+    @Html.ActionLink("Natrag", "Index", null, new { @class = "btn btn-secondary" })
+</p>

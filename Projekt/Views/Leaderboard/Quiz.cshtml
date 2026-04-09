@@ -1,0 +1,35 @@
+﻿@model List<QuizAttempt>
+@{
+    ViewBag.Title = "Rang lista";
+    var quiz = ViewBag.Quiz as Quiz;
+}
+
+<h2>Rang lista – @quiz.Title</h2>
+
+@if (Model == null || Model.Count == 0)
+{
+    <p>Nema još rezultata za ovaj kviz.</p>
+}
+else
+{
+    <table class="table table-striped align-middle">
+        <tr>
+            <th style="width:70px;">#</th>
+            <th>Korisnik</th>
+            <th style="width:120px;">Bodovi</th>
+            <th style="width:180px;">Završeno</th>
+        </tr>
+
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>@(string.IsNullOrWhiteSpace(Model[i].Username) ? "Anonimno" : Model[i].Username)</td>
+                <td><strong>@Model[i].Score</strong></td>
+                <td>@(Model[i].FinishedAt.HasValue ? Model[i].FinishedAt.Value.ToString("dd.MM.yyyy HH:mm") : "-")</td>
+            </tr>
+        }
+    </table>
+}
+
+@Html.ActionLink("Natrag", "Index", null, new { @class = "btn btn-secondary" })
