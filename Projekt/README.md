@@ -1,139 +1,49 @@
-﻿# Sveznalica – Web aplikacija za kvizove
+# Sveznalica
 
-## Opis projekta
+Sveznalica is a web-based quiz application developed as a university project using C#, ASP.NET MVC and MySQL.
 
-Sveznalica je web aplikacija razvijena u ASP.NET MVC tehnologiji koja omogućuje korisnicima igranje kvizova, natjecanje s drugim korisnicima, stvaranje timova i pregled rezultata kroz rang liste.
+The application allows users to create an account, participate in quizzes, track their results and compete with other users. It also includes administrative functionality for managing the application's content.
 
-Aplikacija podržava dvije razine korisničkih prava:
+## Features
 
- Administrator
- Registrirani korisnik
+- User registration and login
+- User and administrator roles
+- Quiz participation
+- Categories and difficulty filtering
+- Results tracking
+- Leaderboards
+- Challenge system
+- Team functionality
+- User profiles and statistics
+- Administration panel
+- CRUD operations for quizzes, categories, questions and answers
 
-Administrator upravlja sadržajem aplikacije (kvizovi, pitanja, kategorije), dok korisnici mogu igrati kvizove, slati izazove i sudjelovati u timovima.
+## Technologies
 
+- C#
+- ASP.NET MVC
+- MySQL
+- HTML
+- CSS
+- Bootstrap
+- JavaScript
 
+## Project Structure
 
-## Tehnologije
+The application follows the MVC architecture and separates the application into:
 
-Projekt koristi sljedeće tehnologije:
+- Models
+- Views
+- Controllers
+- Data access
+- Filters
+- Helpers
 
- ASP.NET MVC (.NET Framework)
- C#
- MySQL baza podataka
- Repository pattern arhitektura
- Bootstrap 5 (UI)
- Session-based autentikacija
+## Purpose
 
+The project was developed as part of my Computer Science studies and gave me practical experience with backend development, relational databases, authentication, authorization and building a complete web application using the MVC architecture.
 
+## Author
 
-## Funkcionalnosti
-
-### Registracija i autentikacija
-
-Korisnici mogu:
-
- registrirati račun
- prijaviti se u sustav
- uređivati profil
- postaviti avatar URL
-
-
-
-### Igranje kvizova
-
-Korisnik može:
-
- odabrati kviz po kategoriji
- igrati kviz
- dobiti rezultat nakon završetka
- pregledati povijest svojih rezultata
-
-
-
-### Rang lista
-
-Sustav prikazuje:
-
- najbolje rezultate po kvizu
- top igrače
- osobne rezultate korisnika
-
-
-
-### Challenge sustav
-
-Korisnici mogu:
-
- poslati izazov drugom korisniku
- prihvatiti izazov
- igrati isti kviz kao protivnik
-
-
-
-### Timovi
-
-Korisnici mogu:
-
- kreirati tim
- dodavati članove
- pregledavati članove tima
-
-
-
-### Administratorske funkcionalnosti
-
-Administrator može:
-
- dodavati kategorije
- uređivati kategorije
- dodavati kvizove
- uređivati kvizove
- dodavati pitanja
- uređivati pitanja
- brisati sadržaj
-
-
-
-## Struktura projekta
-
-Projekt koristi MVC arhitekturu:
-
-Controllers/
-Models/
-Views/
-Repositories/
-ViewModels/
-
-Repository pattern koristi se za pristup bazi podataka.
-
-
-
-## Baza podataka
-
-Glavne tablice:
-
-users
-categories
-quizzes
-questions
-answer_options
-quiz_attempts
-teams
-team_members
-challenges
-
-
-
-## Pokretanje projekta
-
-1. Pokrenuti MySQL server
-2. Importirati bazu podataka
-3. Otvoriti projekt u Visual Studio
-4. Pokrenuti aplikaciju pomoću IIS Express
-
----
-
-## Autor
-
-Ime: Luka Mikac
-Studij: Računarstvo – Međimursko veleučilište u Čakovcu
+**Luka Mikac**  
+Computer Science student
